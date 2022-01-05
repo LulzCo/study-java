@@ -76,4 +76,28 @@
     30
     ```
 
-    
+  - 문자열을 정수로
+  
+    - ```
+      Integer.parseInt(문자열);
+      ```
+  
+  - 문자열을 실수로
+  
+    - ```
+      Double.parseDouble(문자열);
+      ```
+  
+  - 정수를 문자열로
+  
+    - ```
+      String.valueOf(정수);
+      ```
+  
+  - 실수를 문자열로
+  
+    - ```
+      String.valueOf(실수);
+      ```
+  
+      
