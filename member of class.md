@@ -96,7 +96,63 @@
 
   - 자료형에 따른 매개변수 전달
 
-    - 기본 자료형 입력매개변수의 전달
-    - 참조 자료형 입력매개변수의 전달
-
+    - 데이터가 함수 안에서 매개변수로 사용을 할 때에는 스택메모리의 값을 복사한다.
     
+    - 기본 자료형 입력매개변수의 전달
+    
+      - ```
+        public class class_test{
+            public static void main(String[] args) {
+                int a = 3;
+                modifyData(a);
+                printarray(a);
+            }
+            public static void modifyData(int a){
+                a = 6;
+            }
+            public static void printarray(int a){
+                System.out.println(a);
+            }
+        }
+        ```
+    
+        ```
+        3
+        ```
+    
+        기본자료형은 스택메모리에 저장된 값을 복사하여 함수에서 사용하기 때문에 값이 변하지 않는 것이다.
+    
+    - 참조 자료형 입력매개변수의 전달
+    
+      - ```
+        public class class_test{
+            public static void main(String[] args) {
+                int[] array = new int[]{1,2,3};
+                modifyData(array);
+                printarray(array);
+            }
+            public static void modifyData(int[] a){
+                a[0] = 4;
+                a[1] = 5;
+                a[2] = 6;
+            }
+            public static void printarray(int[] a){
+                System.out.println(Arrays.toString(a));
+            }
+        }
+        ```
+    
+        ```
+        [4, 5, 6]
+        ```
+    
+        main 안에 있는 a와 modofy 안에 있는 a는 같은메모리 주소에 저장되어 있다.
+    
+        참조자료형은 스택메모리에 힙 메모리 주소 값을 저장하기 때문에 결국 같은 메모리 공간을 가르키고 있기 때문에 값이 변하는 것이다.
+    
+
+-----
+
+- 함수의 오버로딩
+
+  
