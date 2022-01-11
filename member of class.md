@@ -155,4 +155,137 @@
 
 - 함수의 오버로딩
 
+  - 매개 변수(파라미터)는 다르나 이름은 같은 함수를 만들 수 있다.
   
+  - ```
+    public class class_test{
+        public static void main(String[] args) {
+            int a = 3;
+            String b = new String("안녕하세요");
+    
+            print(a);
+            print(b);
+        }
+        static void print(int a){
+            System.out.println(a);
+        }
+        static void print(String a){
+            System.out.println(a);
+        }
+    }
+    ```
+  
+    ```
+    3
+    안녕하세요
+    ```
+  
+- 생성자
+
+  - 객체를 생성하는 클래스의 내부 구성요소
+  
+  - ```
+    class A{
+        A(){
+            System.out.println("첫 번째 생성자");
+        }
+        A(int a){
+            System.out.println("두 번째 생성자");
+        }
+        A(int a, int b){
+            System.out.println("세 번째 생성자");
+        }
+    }
+    public class class_test{
+        public static void main(String[] args) {
+            A a1 = new A();
+            A a2 = new A(3);
+            A a3 = new A(3, 5);
+        }
+    }
+    ```
+  
+    ```
+    첫 번째 생성자
+    두 번째 생성자
+    세 번째 생성자
+    ```
+  
+- this 키워드와  this() 함수
+
+  - this 키워드
+  
+    - 클래스 내부에 있는 변수를 알려주는 기능
+  
+    - ```
+      class A{
+          int m;
+          int n;
+          void init(int m, int n){
+              m = m;
+              n = n;
+          }
+      }
+      
+      class B{
+          int m;
+          int n;
+          void init(int m, int n){
+              this.m = m;
+              this.n = n;
+          }
+      }
+      
+      public class class_test{
+          public static void main(String[] args) {
+              A a = new A();
+              B b = new B();
+      
+              a.init(1,2);
+              b.init(3,4);
+              System.out.println(a.m);
+              System.out.println(a.n);
+              System.out.println(b.m);
+              System.out.println(b.n);
+          }
+      }
+      ```
+  
+      ```
+      0
+      0
+      3
+      4
+      ```
+  
+  - this() 함수
+  
+    - 클래스 내부 생성자 호출
+  
+    - 함수 안에서 사용 불가능
+  
+    - ```
+      class A{
+          A(){
+              System.out.println("첫 번째 생성자");
+          }
+          A(int m){
+              this();
+              System.out.println("두 번째 생성자");
+          }
+      }
+      public class class_test{
+          public static void main(String[] args) {
+              A a1 = new A();
+              A a2 = new A(3);
+          }
+      }
+      ```
+  
+      ```
+      첫 번째 생성자
+      첫 번째 생성자
+      두 번째 생성자
+      ```
+  
+      
