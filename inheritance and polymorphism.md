@@ -159,14 +159,14 @@
     B bb = new B();             //업캐스팅
     A a = (A) bb;
     
-    A aa = new A();             //다운캐스팅
-    //        B b = (B) aa;							//오류
+    A aa = new A();             
+    //        B b = (B) aa;			//다운캐스팅 오류
     ```
   
     ```
     //두 번째 이미지
     A ab = new B();							//다운캐스팅
-    //        B b = (B) ab;								//오류
+    B b = (B) ab;			
     ```
   
     <img src="/Users/seongwon/workspace/study/Java/Java_study/inheritance and polymorphism_1.png" alt="inheritance and polymorphism_1" style="zoom:50%;" />
