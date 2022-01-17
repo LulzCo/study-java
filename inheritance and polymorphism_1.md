@@ -169,7 +169,7 @@
     B b = (B) ab;			
     ```
   
-    <img src="/Users/seongwon/workspace/study/Java/Java_study/inheritance and polymorphism_1.png" alt="inheritance and polymorphism_1" style="zoom:50%;" />
+    <img src="/Users/seongwon/workspace/study/Java/Java_study/inheritance and polymorphism_1-1.png" alt="inheritance and polymorphism_1-1" style="zoom:50%;" />
 
 - 메서드 오버라이딩
 
