@@ -143,6 +143,30 @@
     true
     ```
 
-    
+- 객체의 타입 변환
 
+  - 업캐스팅(자동변환)과 다운캐스팅(수동변환)
+
+    - 업캐스팅은 괄호() 생략 가능, 다운캐스팅은 괄호() 생략이 필수적이다.
   
+  - ```
+    class A{}
+    class B extends A{}
+    ```
+
+    ```
+    //첫 번째 이미지
+    B bb = new B();             //업캐스팅
+    A a = (A) bb;
+    
+    A aa = new A();             //다운캐스팅
+    //        B b = (B) aa;							//오류
+    ```
+  
+    ```
+    //두 번째 이미지
+    A ab = new B();							//다운캐스팅
+    //        B b = (B) ab;								//오류
+    ```
+  
+    <img src="/Users/seongwon/workspace/study/Java/Java_study/inheritance and polymorphism_1.png" alt="inheritance and polymorphism_1" style="zoom:50%;" />
