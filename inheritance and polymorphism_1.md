@@ -1,4 +1,4 @@
-# inheritance and polymorphism
+# inheritance and polymorphism_1
 
 - 상속
 
@@ -170,3 +170,76 @@
     ```
   
     <img src="/Users/seongwon/workspace/study/Java/Java_study/inheritance and polymorphism_1.png" alt="inheritance and polymorphism_1" style="zoom:50%;" />
+
+- 메서드 오버라이딩
+
+  - ```
+    class A{
+        void print(){
+            System.out.println("A클래스");
+        }
+        void arint(){
+            System.out.println("A클래스 aprint");
+        }
+    }
+    class B extends A{
+        void print(){
+            System.out.println("B클래스");
+        }
+        void brint(){
+            System.out.println("B클래스의 bprint");
+        }
+    }
+    
+    public class default_class{
+        public static void main(String[] args){
+            A aa = new A();
+            aa.print();
+    
+            B bb = new B();
+            bb.print();
+    
+            A ab = new B();
+            ab.print();
+            ab.arint();
+    //        ab.brint();			//오류 발생
+        }
+    }
+    ```
+
+    ```
+    A클래스
+    B클래스
+    B클래스
+    A클래스 aprint
+    ```
+
+  - 덮어쓰기의 개념과 비슷하다.
+
+    - 비슷한 것이지 같은 것은 아니다.
+    - 덮어쓰기
+      - 이전 파일을 아예 삭제하고 새로 쓰는 것
+
+  - 오버라이딩
+
+    - 이전 메서드를 잠시 숨겨두고 그 위에 새로운 메서드로 위장하는 것이다.
+    - 언제든 안에 있는 메서드를 사용할 수 있다.
+    
+  - 오버라이딩과 접근지정자
+  
+    - 접근지정자 범위
+    
+      - public > protected > default > private
+    
+    - 부모 클래스 메서드의 접근 지정자에 따른
+    
+      자식 클래스 메서드의 가능한 접근지정자
+    
+      | 부모클래스의 접근 지정자 | 자식클래스의 접근 지정자            |
+      | :----------------------: | :---------------------------------- |
+      |          public          | public                              |
+      |        protected         | public, protected                   |
+      |         default          | public, protected, default          |
+      |         private          | public, protected, default, private |
+    
+      - 오버라이딩을 할 경우 자식클래스의 접근지정자는 부모클래스보다 넓어야 사용가능하다.
