@@ -1,4 +1,4 @@
 # Java_study
 do it java programming
            
-Seongwon
+Yang Seongwon
