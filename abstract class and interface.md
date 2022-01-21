@@ -54,6 +54,8 @@
 
   - 인터페이스 안에 모든 메서드는 추상 메서드이다.
 
+    - 자바 8이 등장하며 해당 특징은 달라졌다.(default method도 포함 가능)
+
   - 인터페이스는 클래스를 상속받을 수 없다.
 
   - ```
@@ -141,7 +143,61 @@
 
       2번의 경우 일회성
 
-      
+- 디폴트 메서드와 정적 메서드
 
+  - ```
+    interface A {
+        void abc();
+        default void bcd() {
+            System.out.println("A 인터페이스의 bcd()");
+        }
+    
+        static void cde() {
+            System.out.println("A 인터페이스의 cde()");
+        }
+    }
+    
+    class B implements A {
+        public void abc() {
+            System.out.println("B 클래스의 abc()");
+        }
+    }
+    class C implements A {
+        public void abc() {
+            System.out.println("C 클래스의 abc()");
+        }
+        public void bcd() {
+            A.super.bcd();
+            System.out.println("C 클래스츼 bcd()");
+        }
+    }
+    
+    public class default_class{
+        public static void main(String[] args){
+            A a1 = new B();
+            A a2 = new C();
+    
+            a1.abc();
+            a1.bcd();
+            a2.abc();
+            a2.bcd();
+            A.cde();
+        }
+    }
+    ```
 
-
+    ```
+    B 클래스의 abc()
+    A 인터페이스의 bcd()
+    C 클래스의 abc()
+    A 인터페이스의 bcd()
+    C 클래스츼 bcd()
+    A 인터페이스의 cde()
+    ```
+  
+    - C 객체를 생성하여 실행하였을 때,
+      - abc() : 구현
+      - bcd() : 오버라이딩
+    - C 클래스에서 메서드를 생성할 때, 부모의 메서드를 호출하고 싶은 경우
+      - interface_name.super.method_name 형식으로 호출을 하면 된다.
+    - A 인터페이스에서 정적 메서드를 생성하여 사용할 수 있다.ㅎ
