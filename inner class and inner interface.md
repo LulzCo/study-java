@@ -262,3 +262,41 @@
 -----
 
 - inner interface
+
+  - 이너 클래스와 마찬 가지로 클래스 내부에서 정의하는 인터페이스
+
+  - 정적(static)으로만 가능g
+
+    코드에 static을 입력하지 않아도 자동으로 추가
+
+  - 이너 인터페이스 객체 생성 방법
+
+    - ```
+      class A {
+      	interface B {
+      		public abstract void bcd();
+      	}
+      }
+      ```
+
+      1. ```
+         class C implements A.B {
+         	public void bcd() {
+         		System.out.println("이너 인터페이스 구현 클래스 생성")
+         	}
+         }
+         ```
+
+         ```
+         A.B ab = new C();
+         C c = new C();
+         c.bcd();
+         ```
+
+      2. ```
+         A.B b = new A.B() {
+         	public void bcd("익명 이너 클래스로 객체 생성")
+         }
+         ```
+
+         
