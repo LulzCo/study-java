@@ -110,10 +110,12 @@
 
   - 지역 익명 이너 클래스 : 메서드 내부에서 사용
 
+  - 익명 이너 클래스를 사용하는 경우 항상 부모 타입으로만 선언할 수 있다.
+
   - 인스턴스 이너 클래스와 익명 이너 클래스 비교
 
     - 인스턴스 이너 클래스
-
+  
       - ```
         class A {
         	C c = new B();
@@ -137,9 +139,24 @@
         	}
         }
         ```
-
+        
+        ```
+        interface C {
+        	public abstract void bcd();
+        }
+        
+        class B implements C {
+        	public void bcd() {}			// 오버라이딩 메서드
+        	public void cde() {}			// 추가 메서드
+        }
+        
+        B b = new B();
+        b.bcd();			// enable
+        b.cde();			// enable
+        ```
+  
     - 익명 이너 클래스
-
+  
       - ```
         class A {
         	C c = new C() {
@@ -162,7 +179,86 @@
         	}
         }
         ```
-
+  
+        ```
+        interface C {
+        	public abstract void bcd();
+        }
         
+        C c = new C() {
+        	public void bcd() {			// 오버라이딩 메서드
+        		cde();								// 내부적으로 호출 가능
+        	}
+        	public void cde() {}		// 추가 메서드
+        }
+        
+        c.bcd();			// enable
+        c.cde();			// disable
+        ```
+  
+  - 익명 이너 클래스 활용
+  
+    - ```
+      interface A {
+      	public abstract void abc();
+      }
+      
+      class C {
+      	void cde(A a) {
+      		a.abc();
+      	}
+      }
+      
+      class B implements A {
+      	public void abc() {
+      		...
+      	}
+      }
+      ```
+  
+      다음 코드에서 abc() 메서드를 사용하기 위해서는 4가지 방법이 있다.
+  
+      1. ```
+         C c = new C();
+         
+         A a1 = new B();
+         c.cde(a1)
+         ```
+  
+      2. ```
+         C c = new C();
+         
+         c.cde(new B());
+         ```
+  
+      3. ```
+         C c = new C();
+         
+         A a = new A() {
+         	public void abc() {
+         		...
+         	}
+         };
+         c.cde(a);
+         ```
+  
+      4. ```
+         C c = new C();
+         
+         c.cde(new A() {
+         	public void abc() {
+         		...
+         	}
+         });
+         ```
+  
+      - 1번과 2번은 자식 클래스를 직접 정의
+      - 3번과 4번은 익명 이너 클래스를 사용
+  
+    - 이와 같이 클래스를 매개 변수로 하여 사용하는 경우에 익명 이너 클래스를 사용하는 것이 코드가 더 간결해진다.
+  
+      익명 이너 클래스를 사용하는 경우 따로 자식 클래스를 선언하지 않아도 되기 때문이다.
 
-    
+-----
+
+- inner interface
