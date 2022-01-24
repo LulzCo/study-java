@@ -1,4 +1,4 @@
-# exception handling
+# exception handling_1
 
 - 예외와 오류의 차이
   - 예외 : 개발가가 처리할 수 있는 오루
