@@ -101,3 +101,51 @@
 
     이 때, 사용자 정의 예외 클래스를 필요로 하는 것이다.
 
+  - 예외 클래스 생성 순서
+
+    - 일반 예외
+
+      - ```
+        // 1. 사용자 정의 예외 클래스 작성
+        class MyException extends Exception {
+        	MyException() {}
+        	MyException(String s) {
+        		super(s);
+        	}
+        }
+        
+        // 2. 사용자 정의 예외 객체 생성
+        MyException me1 = new MyException();
+        MyException me2 = new MyException("예외 메시지")
+        
+        // 3. 예외 상황에서 객체 던지기
+        throw me1;
+        throw me2;
+        throw new MyException();
+        throw new MyException("예외 메시지");
+        ```
+
+    - 실행 예외
+
+      - ```
+        // 1. 사용자 정의 예외 클래스 작성
+        class MyRTException extends RuntimeException {
+        	MyRTException() {}
+        	MyRTException(String s) {
+        		super(s);
+        	}
+        }
+        
+        // 2. 사용자 정의 예외 객체 생성
+        MyRTException mre1 = new MyRTException();
+        MyRTException mre2 = new MyRTException("예외 메시지")
+        
+        // 3. 예외 상황에서 객체 던지기
+        throw mre1;
+        throw mre2;
+        throw new MyRTException();
+        theow new MyRTException("예외 메시지");
+        ```
+
+    - 
+
