@@ -17,7 +17,7 @@
 
 - 자바 프로그램에서의 쓰레드
 
-  - <img src="image/thread 1.png" alt="thread_1" style="zoom:50%;" />
+  - <img src="image/thread_1.png" alt="thread_1" style="zoom:50%;" />
 
   1. .class 파일 실행
   2. JVM - main 쓰레드 생성, main 쓰레드 1개만이 존재
