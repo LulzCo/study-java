@@ -107,8 +107,10 @@
 
        start() 메서드 : 새로운 쓰레드 생성/추가하기 위한 모든 준비 + 새로운 쓰레드 위에 run() 실행
 
-     - 비디오 프레임과 자막을 2개의 쓰레드로 활용
+     - 2개의 쓰레드 활용
 
+       비디오 프레임과 자막 활용
+       
        ```
        class SMIFileThread extends Thread {
        	public voic run() {
@@ -148,7 +150,7 @@
        	}
        }
        ```
-
+       
        ```
        (비디오 프레임)1
        (자막 번호)하나
@@ -161,5 +163,87 @@
        (비디오 프레임)5
        (자막 번호)다섯
        ```
-
+  
   2. Runnable 인터페이스 구현 객체를 생성한 후 Thread 생성자로 Runnable 객체 전달
+  
+     - ```
+       class MyRunnable implements Runnable {
+       	public void rub() {
+       		// 쓰레드 작업 내용
+       	}
+       }
+       
+       public class default_class {
+       	public static void main(String[] args) {
+       		Runnable r = new MyRunnable();
+       		
+       		// Runnable 인터페이스에서는 start() 메서드가 없기에 사용
+       		Thread thread = new Thread(r);
+       		
+       		myThread.start();
+       	}
+       }
+       ```
+  
+     - 3개의 쓰레드 활용
+  
+       ```
+       class SMIFileRunnable implements Runnable {
+           public void run() {
+               // 자막 번호 저장
+               String[] strArray = {"하나", "둘", "셋", "넷", "다섯"};
+               // 0.01초 뒤에 시작
+               try {
+                   Thread.sleep(10);
+               } catch (InterruptedException e) {}
+       
+               // 자박 번호 출력
+               for (int i = 0; i < strArray.length; i++) {
+                   System.out.println("(자막 번호)" + strArray[i]);
+                   try {
+                       Thread.sleep(200);
+                   } catch (InterruptedException e) {}
+               }
+           }
+       }
+       
+       class VideoFileRunnable implements Runnable {
+           public void run() {
+               // 비디오 프레임 번호 저장
+               int[] intArray = {1, 2, 3, 4, 5};
+               // 비디오 프레임 번호 출력
+               for (int i = 0; i < intArray.length; i++) {
+                   System.out.println("(프레임 번호)" + intArray[i]);
+                   try {
+                       Thread.sleep(200);
+                   } catch (InterruptedException e) {}
+               }
+           }
+       }
+       
+       public class default_class {
+           public static void main(String[] args) {
+               // 자막 출력 객체 생성
+               Runnable smiFileRunnable = new SMIFileRunnable();
+               Thread thread1 = new  Thread(smiFileRunnable);
+               //자막 출력 스레드 실행
+               thread1.start();
+       
+               Runnable videoFileRunnable = new VideoFileRunnable();
+               Thread thread2 = new Thread(videoFileRunnable);
+               thread2.start();
+           }
+       }
+       ```
+  
+       총 3개의 쓰레드 사용 : 메인쓰레드 / 자막 번호 출력 쓰레드 / 비디오 프레임 번호 출력 쓰레드
+  
+       -----
+  
+  - 이너 클래스를 활용한 쓰레드 객체 생성 및 실행
+  
+    - ```
+      
+      ```
+  
+      
