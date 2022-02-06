@@ -17,7 +17,7 @@
 
 - 자바 프로그램에서의 쓰레드
 
-  - <img src="thread_1.png" alt="thread_1" style="zoom:50%;" />
+  - ![thread_1](image/thread_1.png)
 
   1. .class 파일 실행
   2. JVM - main 쓰레드 생성, main 쓰레드 1개만이 존재
@@ -243,7 +243,29 @@
   - 이너 클래스를 활용한 쓰레드 객체 생성 및 실행
   
     - ```
-      
+      public class default_class {
+      	public static void main(String[] args) {
+      		// 자막 번호를 출력하는 쓰레드의 익명 이너 클래스 정의
+      		Thread thread1 = new Thread(new Runnable() {
+      			public void run() {
+      				// 자막 번호 출력
+      				String[] strArray = {"하나", "둘", "셋", "넷", "다섯"};
+      				try {
+      					Thread.sleep(10);
+      				} catch (InterruptedException e) {}
+      				for (int i = 0; i < strArray.length; i++) {
+      					System.out.println("(자막번호)" + strArray[i]);
+      					try {
+      						Thread.sleep(200);
+      					} catch (InterruptedException e) {}
+      				}
+      		});
+      		
+      		Thread thread2 = new Thread(new Runnable() {
+      			public
+      		})
+      	}
+      }
       ```
   
-      
+  
