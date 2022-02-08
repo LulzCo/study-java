@@ -1,4 +1,4 @@
-# thread
+# thread_1
 
 - 프로그램 : 하드디스크에 저장된 파일들의 모임
 
@@ -17,7 +17,7 @@
 
 - 자바 프로그램에서의 쓰레드
 
-  - <img src="image/thread_1.png" alt="thread_1" style="zoom:50%;" />
+  - <img src="images/thread_1-1.png" alt="thread_1" style="zoom:50%;" />
 
   1. .class 파일 실행
   2. JVM - main 쓰레드 생성, main 쓰레드 1개만이 존재
@@ -244,45 +244,47 @@
   
     - ```
       public class default_class {
-      	public static void main(String[] args) {
-      		// 자막 번호를 출력하는 쓰레드의 익명 이너 클래스 정의
-      		Thread thread1 = new Thread(new Runnable() {
-      			public void run() {
-      				// 자막 번호 출력
-      				String[] strArray = {"하나", "둘", "셋", "넷", "다섯"};
-      				try {
-      					Thread.sleep(10);
-      				} catch (InterruptedException e) {}
-      				for (int i = 0; i < strArray.length; i++) {
-      					System.out.println("(자막번호)" + strArray[i]);
-      					try {
-      						Thread.sleep(200);
-      					} catch (InterruptedException e) {}
-      				}
-      		});
-      		
-      		Thread thread2 = new Thread(new Runnable() {
-      			public
-      		})
-      	}
+          public static void main(String[] args) {
+              // 자막 번호를 출력하는 쓰레드의 익명 이너 클래스 정의
+              Thread thread1 = new Thread(new Runnable() {
+                  @Override
+                  public void run() {
+                      // 자막 번호 출력
+                      String[] strArray = {"하나", "둘", "셋", "넷", "다섯"};
+                      try {
+                          Thread.sleep(10);
+                      } catch (InterruptedException e) {
+                      }
+                      for (int i = 0; i < strArray.length; i++) {
+                          System.out.println("(자막번호)" + strArray[i]);
+                          try {
+                              Thread.sleep(200);
+                          } catch (InterruptedException e) {
+                          }
+                      }
+                  }
+              });
+      
+              // 프레임 번호를 출력하는 익명 이너 클래스 정의
+              Thread thread2 = new Thread(new Runnable() {
+                  @Override
+                  public void run() {
+                      // 프레임 번호 출력
+                      int[] intArray = {1, 2, 3, 4, 5};
+                      for (int i = 0; i < intArray.length; i++) {
+                          System.out.println("(비디오 프레임)" + intArray[i]);
+                          try {
+                              Thread.sleep(200);
+                          } catch (InterruptedException e) {}
+                      }
+                  }
+              });
+      
+      			thread1.start();
+      			thread2.start();
+          }
       }
       ```
+    
+      메인 쓰레드 하나와 익명 이너 클래스 두 개, 총 3개의 쓰레드 사용
   
-  
-
-
-
-
-
-
-
-![thread_1](`image/thread_1.png)
-
-
-
-
-
-
-
-
-
