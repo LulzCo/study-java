@@ -114,7 +114,168 @@
   8번째 쓰레드 end
   ```
 
+- 쓰레드의 데몬 설정
+
+  - 일반적으로 쓰레드는 다른 쓰레드의 종료와 상관없이 자신의 작업을 마칠 때까지 실행
   
-
-
+  - 데몬 쓰레드 : 일반 쓰레드가 종료되면 함께 종료되는 쓰레드
+  
+    - ex) 문서 편집 프로그램의 자동 저장 쓰레드
+      - 프로그램이 켜져있으면 자동으로 쓰레드는 돌아가지만 프로그램이 꺼지면 이 쓰레드는 자동 종료
+  
+  
+    <img src="images/thread_2-1.png" alt="thread_2-1" style="zoom:50%;" />
+  
+  - 일반 쓰레드
+  
+    .setDaemon(false) : 일반 쓰레드 설정
+  
+    ```
+    class MyThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println(getName() + " : " + (isDaemon()? "데몬 쓰레드" : "일반 쓰레드"));
+            for(int i = 0; i < 6; i++) {
+                System.out.println(getName() + " : " + i + "초");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+            }
+        }
+    }
+    
+    public class default_class {
+        public static void main(String[] args) {
+            // 일반 쓰레드
+            Thread thread1 = new MyThread();
+            thread1.setDaemon(false);			// 일반 쓰레드로 설정
+            thread1.setName("thread1(일반 쓰레드)");
+            thread1.start();
+    
+            // 4초 후 main() 쓰레드 종료
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {}
+            System.out.println("main Thread 종료");
+        }
+    }
+    ```
+  
+    ```
+    thread1(일반 쓰레드) : 일반 쓰레드
+    thread1(일반 쓰레드) : 0초
+    thread1(일반 쓰레드) : 1초
+    thread1(일반 쓰레드) : 2초
+    thread1(일반 쓰레드) : 3초
+    main Thread 종료
+    thread1(일반 쓰레드) : 4초
+    thread1(일반 쓰레드) : 5초
+    ```
+  
+    메인 쓰레드가 종료되어도 일반 쓰레드는 마저 실행되고 종료
+  
+  - 데몬 쓰레드
+  
+    .setDaemon(true)
+  
+    ```
+    class MyThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println(getName() + " : " + (isDaemon()? "데몬 쓰레드" : "일반 쓰레드"));
+            for(int i = 0; i < 6; i++) {
+                System.out.println(getName() + " : " + i + "초");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+            }
+        }
+    }
+    
+    public class default_class {
+        public static void main(String[] args) {
+            // 데몬 쓰레드
+            Thread thread2 = new MyThread();
+            thread2.setDaemon(true);			// 데몬 쓰레드로 설정
+            thread2.setName("thread2(데몬 쓰레드)");
+            thread2.start();
+    
+            // 4초 후 main() 쓰레드 종료
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {}
+            System.out.println("main Thread 종료");
+        }
+    }
+    ```
+  
+    ```
+    thread2(데몬 쓰레드) : 데몬 쓰레드
+    thread2(데몬 쓰레드) : 0초
+    thread2(데몬 쓰레드) : 1초
+    thread2(데몬 쓰레드) : 2초
+    thread2(데몬 쓰레드) : 3초
+    main Thread 종료
+    ```
+  
+    메인 쓰레드 종료 시, 데몬 쓰레드 종료
+  
+  - 데몬쓰레드가 죽지 않는 경우
+  
+    ```
+    class MyThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println(getName() + " : " + (isDaemon()? "데몬 쓰레드" : "일반 쓰레드"));
+            for(int i = 0; i < 6; i++) {
+                System.out.println(getName() + " : " + i + "초");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+            }
+        }
+    }
+    
+    public class default_class {
+        public static void main(String[] args) {
+            // 일반 쓰레드
+            Thread thread1 = new MyThread();
+            thread1.setDaemon(false);			// 일반 쓰레드로 설정
+            thread1.setName("thread1(일반 쓰레드)");
+            thread1.start();
+    
+            // 데몬 쓰레드
+            Thread thread2 = new MyThread();
+            thread2.setDaemon(true);            // 데몬 쓰레드로 설정
+            thread2.setName("thread2(데몬 쓰레드)");
+            thread2.start();
+    
+            // 4초 후 main() 쓰레드 종료
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {}
+            System.out.println("main Thread 종료");
+        }
+    }
+    ```
+  
+    ```
+    thread1(일반 쓰레드) : 일반 쓰레드
+    thread2(데몬 쓰레드) : 데몬 쓰레드
+    thread1(일반 쓰레드) : 0초
+    thread2(데몬 쓰레드) : 0초
+    thread2(데몬 쓰레드) : 1초
+    thread1(일반 쓰레드) : 1초
+    thread1(일반 쓰레드) : 2초
+    thread2(데몬 쓰레드) : 2초
+    thread1(일반 쓰레드) : 3초
+    thread2(데몬 쓰레드) : 3초
+    main Thread 종료
+    thread2(데몬 쓰레드) : 4초
+    thread1(일반 쓰레드) : 4초
+    thread2(데몬 쓰레드) : 5초
+    thread1(일반 쓰레드) : 5초
+    ```
+  
+    메인 쓰레드는 종료되어도 일반 쓰레드는 종료되지 않았기 때문에 데몬 쓰레드가 종료되지 않는 것이다.
 
