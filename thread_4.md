@@ -110,6 +110,8 @@
 - TIMED_WAITING
 
   - ```
+    import package_test.class_test;
+    
     class MyThread extends Thread {
         @Override
         public void run() {
@@ -117,15 +119,16 @@
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 System.out.println( "-- sleep() 진행 중 interrupt() 발생");
-                for(long i = 0; i < 1000000000L; i++) {}
+                for(long i = 0; i < 1000000000L; i++) {
+                    for(long j = 0; j < 1000000000L; j++) {}
+                }
             }
         }
     }
     
     public class default_class {
         public static void main(String[] args) {
-            MyThread myThread = new MyT
-            hread();
+            MyThread myThread = new MyThread();
             myThread.start();
     
             try {
@@ -134,10 +137,12 @@
             System.out.println("MyThread State : " + myThread.getState());
             
             // TIMED_WAITING
-            myThread.interrupt();
+            myThread.interrupt();			// 예외 발생 시키기
+            
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {}
+            
             System.out.println("MyThread State : " + myThread.getState());
         }
     }
@@ -146,7 +151,7 @@
     ```
     MyThread State : TIMED_WAITING
     -- sleep() 진행 중 interrupt() 발생
-    MyThread State : TERMINATED
+    MyThread State : RUNNABLE
     ```
 
-    
+    TIMED_WAITING : 주어진 시간동안 기다리는 상태
