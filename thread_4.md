@@ -1,6 +1,6 @@
 # thread_4
 
-- 쓰레드의 상태 값 가져오기
+- NEW, RUNNABLE,TERMINATED
 
   - ```
     public class default_class {
@@ -106,3 +106,47 @@
 
     - 데몬 쓰레드로 설정한 이유
       - 쓰레드 클래스에서 무한 반복이 실행이 되므로 데몬으로 설정
+
+- TIMED_WAITING
+
+  - ```
+    class MyThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println( "-- sleep() 진행 중 interrupt() 발생");
+                for(long i = 0; i < 1000000000L; i++) {}
+            }
+        }
+    }
+    
+    public class default_class {
+        public static void main(String[] args) {
+            MyThread myThread = new MyT
+            hread();
+            myThread.start();
+    
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            System.out.println("MyThread State : " + myThread.getState());
+            
+            // TIMED_WAITING
+            myThread.interrupt();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            System.out.println("MyThread State : " + myThread.getState());
+        }
+    }
+    ```
+
+    ```
+    MyThread State : TIMED_WAITING
+    -- sleep() 진행 중 interrupt() 발생
+    MyThread State : TERMINATED
+    ```
+
+    
