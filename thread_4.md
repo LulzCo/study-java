@@ -310,12 +310,84 @@
   
 - WAITING
 
-  - 동기화만을 사용했을 때 임의적인 두 쓰레드의 실행 순서
+  - wait() notify() 를 이용한 쓰레드 교차 실행
   
     ```
+    class DataBox {
+        boolean isEmpty = true;
+        int data;
+        synchronized void inputData(int data) {
+            if(!isEmpty) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {}
+            }
+            this.data = data;
+            isEmpty = false;
+            System.out.println("입력 데이터 : " + data);
+            notify();
+        }
+        synchronized void outputData() {
+            if(isEmpty) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {}
+            }
+            isEmpty = true;
+            System.out.println("출력 데이터 : " + data);
+            notify();
+        }
+    }
     
+    public class default_class {
+        public static void main(String[] args) {
+            DataBox dataBox = new DataBox();
+            Thread t1 = new Thread() {
+                public void run() {
+                    for(int i = 0; i < 9; i++) {
+                        dataBox.inputData(i);
+                    }
+                };
+            };
+            Thread t2 = new Thread() {
+                public void run() {
+                    for(int i = 0; i < 9; i++) {
+                        dataBox.outputData();
+                    }
+                };
+            };
+    
+            t1.start();
+            t2.start();
+        }
+    }
     ```
   
-    
+    ```
+    입력 데이터 : 0
+    출력 데이터 : 0
+    입력 데이터 : 1
+    출력 데이터 : 1
+    입력 데이터 : 2
+    출력 데이터 : 2
+    입력 데이터 : 3
+    출력 데이터 : 3
+    입력 데이터 : 4
+    출력 데이터 : 4
+    입력 데이터 : 5
+    출력 데이터 : 5
+    입력 데이터 : 6
+    출력 데이터 : 6
+    입력 데이터 : 7
+    출력 데이터 : 7
+    입력 데이터 : 8
+    출력 데이터 : 8
+    ```
+  
+    wait() : 현재 쓰레드 일시 정지
+  
+    notify() : 일시 정지 되어있던 임의 쓰레드 깨우기
+  
+    notifyAll() : 일시 정디 되어있는 모든 쓰레드 깨우기
   
 
