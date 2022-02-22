@@ -222,4 +222,100 @@
 
   - 공유 객체 동기화로 인한 BLOCKED 상태
   
+    ```
+    class MyBlockTest {
+        // 공유 객체
+        MyClass mc = new MyClass();;
+        // 3개의 쓰레드 필드 생성
+        Thread t1 = new Thread("thread1") {
+            public void run() {
+                mc.syncMethod();
+            };
+        };
+        Thread t2 = new Thread("thread2") {
+            public void run() {
+                mc.syncMethod();
+            };
+        };
+        Thread t3 = new Thread("thread3") {
+            public void run() {
+                mc.syncMethod();
+            };
+        };
+    
+        Thread t4 = new Thread("thread4") {
+            public void run() {
+                mc.syncMethod();
+            };
+        };
+    
+        void startAll() {
+            t1.start();
+            t2.start();
+            t3.start();
+            t4.start();
+        }
+    
+        class MyClass {
+            synchronized void syncMethod() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {}
+                System.out.println("====" + Thread.currentThread().getName() + "====");
+                System.out.println("thread1 -> " + t1.getState());
+                System.out.println("thread2 -> " + t2.getState());
+                System.out.println("thread3 -> " + t3.getState());
+                System.out.println("thread4 -> " + t4.getState());
+                for(long i = 0; i < 1000000000L; i++) {}
+            }
+        }
+    }
+    
+    public class default_class {
+        public static void main(String[] args) {
+            MyBlockTest mbt = new MyBlockTest();
+            mbt.startAll();
+        }
+    }
+    ```
+  
+    ```
+    ====thread1====
+    thread1 -> RUNNABLE
+    thread2 -> BLOCKED
+    thread3 -> BLOCKED
+    thread4 -> BLOCKED
+    ====thread4====
+    thread1 -> TERMINATED
+    thread2 -> BLOCKED
+    thread3 -> BLOCKED
+    thread4 -> RUNNABLE
+    ====thread3====
+    thread1 -> TERMINATED
+    thread2 -> BLOCKED
+    thread3 -> RUNNABLE
+    thread4 -> TERMINATED
+    ====thread2====
+    thread1 -> TERMINATED
+    thread2 -> RUNNABLE
+    thread3 -> TERMINATED
+    thread4 -> TERMINATED
+    ```
+  
+    - 쓰레드 실행 순서 : 동기화 영역에서 FILO형식을 갖고 있다.
+  
+      thread1은 바로 실행이 되기 때문에 제일 먼저 실행이 되고 그 다음으로 정해질 순서를 정할 때, FILO 으로 순서를 정한다.
+  
+    - BLOCKED : 공유 객체를 사용하지 못한 상태
+  
+- WAITING
+
+  - 동기화만을 사용했을 때 임의적인 두 쓰레드의 실행 순서
+  
+    ```
+    
+    ```
+  
+    
+  
 
