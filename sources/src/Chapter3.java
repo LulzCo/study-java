@@ -47,8 +47,16 @@ public class Chapter3 {
         System.out.println(isTrue);
         System.out.println(isFalse);
     }
+
+    public static void printChar() {
+        /* 문자 츨력 - 쌍 따옴표가 아니라 따옴표로 사용해야 한다.*/
+        char a = 'a';
+        System.out.println(a);
+    }
     public static void main(String[] args){
 //        printNumbers();
-        printBooleans();
+//        printBooleans();
+        printChar();
+
     }
 }
