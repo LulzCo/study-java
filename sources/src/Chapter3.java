@@ -58,6 +58,10 @@ public class Chapter3 {
         // 문자열 출력
         String a = "abcdefg";
         System.out.println(a);
+
+        // 문자열 객체 출력
+        String b = new String("abcdefg");
+        System.out.println(b);
     }
     public static void main(String[] args){
 //        printNumbers();
