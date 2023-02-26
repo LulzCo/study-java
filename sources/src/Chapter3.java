@@ -62,6 +62,48 @@ public class Chapter3 {
         // 문자열 객체 출력
         String b = new String("abcdefg");
         System.out.println(b);
+
+        //  String 클래스의 내장 함수
+        // equals()
+        System.out.println(a.equals(b));            // 같은 문자열인지
+        System.out.println(a == b);                 // 같은 객체인지
+
+        // indexOf()
+        System.out.println(a.indexOf("abc"));       // 파라미터 문자열값이 어디부터 시작하는지 -> 존재하지 않는다면 -1
+
+        // contains()
+        System.out.println(a.contains("f"));
+        System.out.println(a.contains("h"));
+
+        // charAt()
+        System.out.println(a.charAt(3));
+
+        // replaceAll()
+        System.out.println(a.replace('a', 'b'));
+        System.out.println(a.replaceAll("bcd", "234"));
+
+        // subString()
+        System.out.println(a.substring(0, 2));
+
+        // toUpperCase()
+        System.out.println(a.toUpperCase());
+
+        // split() -> 배열로 리턴
+        String c = "a:b:c:d";
+        System.out.println(c);
+        String[] result = c.split(":");
+        for (int i = 0; i < result.length; i++) {           // 자바의 배열을 출력시키면 메모리값이 나온다
+            System.out.print(result[i]);
+        }
+        System.out.println();
+
+        // formatting
+        System.out.println(String.format("I want to buy %d %s!!", 3, "macbook"));
+
+        // 정렬과 공백
+        System.out.println(String.format("--%10s--", "hi"));        // 오른쪽 글자
+        System.out.println(String.format("--%-10s--", "hi"));       // 왼쪽 글자
+
     }
     public static void main(String[] args){
 //        printNumbers();
