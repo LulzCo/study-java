@@ -2,7 +2,7 @@
  * 자료형
  */
 public class Chapter3 {
-    public void numberData() {
+    public static void printNumbers() {
         System.out.println("Chapter3");
         System.out.println("--------");
 
@@ -39,6 +39,16 @@ public class Chapter3 {
         int hex = 0xC;          // 십진수 12
         System.out.println(hex);
     }
-    public static void main(String[] args) {
+
+    public static void printBooleans() {
+        boolean isTrue = true;
+        boolean isFalse = false;
+
+        System.out.println(isTrue);
+        System.out.println(isFalse);
+    }
+    public static void main(String[] args){
+//        printNumbers();
+        printBooleans();
     }
 }
