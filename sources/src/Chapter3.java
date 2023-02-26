@@ -49,14 +49,20 @@ public class Chapter3 {
     }
 
     public static void printChar() {
-        /* 문자 츨력 - 쌍 따옴표가 아니라 따옴표로 사용해야 한다.*/
+        // 문자 츨력 - 쌍 따옴표가 아니라 따옴표로 사용해야 한다.
         char a = 'a';
+        System.out.println(a);
+    }
+
+    public static void printString() {
+        // 문자열 출력
+        String a = "abcdefg";
         System.out.println(a);
     }
     public static void main(String[] args){
 //        printNumbers();
 //        printBooleans();
-        printChar();
-
+//        printChar();
+        printString();
     }
 }
