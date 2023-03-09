@@ -105,10 +105,15 @@ public class Chapter3 {
         System.out.println(String.format("--%-10s--", "hi"));       // 왼쪽 글자
 
     }
+
+    public static void printBuffer() {
+        ///////////////////////////////////
+    }
     public static void main(String[] args){
 //        printNumbers();
 //        printBooleans();
 //        printChar();
-        printString();
+//        printString();
+        printBuffer();
     }
 }
