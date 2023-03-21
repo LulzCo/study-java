@@ -1,15 +1,12 @@
 public class Chapter3 {
 
     public static void main(String[] args) {
-//        aboutString();
+        aboutString();
         aboutOperator();
-//        printNumbers();
-//        printBooleans();
-//        printChar();
-//        printString();
-//        printBuffer();
-
-
+        printNumbers();
+        printBooleans();
+        printChar();
+        printString();
     }
 
     public static void aboutString() {
@@ -17,7 +14,7 @@ public class Chapter3 {
         String str2 = new String("abc");
 
         /* 문자열을 비교할 때는 항상 반드시 equals()를 사용할 것 */
-        System.out.println(str1 == str2);           // false
+        System.out.println(str2 == str1);           // false
         System.out.println(str1.equals(str2));      // true
     }
 
@@ -134,4 +131,5 @@ public class Chapter3 {
         // 정렬과 공백
         System.out.println(String.format("--%10s--", "hi"));        // 오른쪽 글자
         System.out.println(String.format("--%-10s--", "hi"));       // 왼쪽 글자
+    }
 }
